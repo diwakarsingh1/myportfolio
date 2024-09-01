@@ -13,6 +13,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Run npm fund to check for funding needs
+RUN npm fund
+
 # Copy the rest of the application code
 COPY . .
 
