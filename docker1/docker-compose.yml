@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ..  # Go up one directory level to include the root directory
+      dockerfile: docker/Dockerfile  # Path to Dockerfile in the 'docker' directory
+    image: ${IMAGE_NAME}
+    container_name: ${CONTAINER_NAME}
+    networks:
+      custom_network:
+        ipv4_address: ${CONTAINER_IP}
+    ports:
+      - "8080:80"
+    restart: always
+
+networks:
+  custom_network:
+    external:
+      name: my_net
