@@ -3,7 +3,7 @@ name: Deploy FastAPI to Azure
 on:
   push:
     branches:
-      - main  # Change to the branch you want to track
+      - development  # Change to the branch you want to track
 
 jobs:
   build-and-deploy:
