@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Change to the branch you want to track
+
 permissions:
   id-token: write
   contents: read
@@ -14,42 +15,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Azure CLI Login
-        run: |
-          az login
 
-      # - name: Azure login
-      #   uses: azure/login@v2
-      #   with:
-      #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-      #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # - name: Azure CLI script
-      #   uses: azure/cli@v2
-      #   with:
-      #     azcliversion: latest
-      #     inlineScript: |
-      #       az account show
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
 
-      # - name: Log in to Azure
-      #   uses: azure/login@v1
-      #   with:
-      #     creds: |
-      #       {
-      #         "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
-      #         "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
-      #         "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
-      #         "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-      #       }
-      # - run: echo "Azure loggedin successfully"
-      # - name: Print Azure Subscription Name
-      #   run: |
-      #     az account show --query name --output tsv
-
-
+     
     # - name: Log in to ACR
     #   run: |
     #     az acr login --name ${{ secrets.ACR_NAME }}
