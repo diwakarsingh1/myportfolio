@@ -11,7 +11,7 @@ services:
       custom_network:
         ipv4_address: ${CONTAINER_IP}
     ports:
-      - "80:80"
+      - "8080:80"
     restart: always
 
 networks:

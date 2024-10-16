@@ -127,6 +127,17 @@ const experiences = [
     ],
   },
   {
+    title: "DevOps Engineer- Trainee",
+    company_name: "Sharajman Technologies",
+    icon: starbucks,
+    iconBg: "#E6DEDD",
+    date: "18 March, 2024 - 18 September, 2024",
+    points: [
+      "Engineered a Jenkins pipeline to deploy Angular and FastAPI apps with Docker, cutting deployment time by 30% and boosting code stability by 20% through SonarQube integration. Incorporated OWASP security tests, enhancing compliance by 25%.",
+      "Supervised the monitoring of 50+ containers using Grafana, Prometheus, cAdvisor, and Portainer, improving system performance by 40% and reducing downtime by 15%."
+    ],
+  },
+  {
     title: "DevOps Engineer- Intern",
     company_name: "LinuxWorld Informatics Pvt. Ltd.",
     icon: tesla,
@@ -168,7 +179,7 @@ const testimonials = [
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "Scalable Web-App Deployment",
     description:
       "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
     tags: [
@@ -189,7 +200,7 @@ const projects = [
     source_code_link: "https://github.com/",
   },
   {
-    name: "Job IT",
+    name: "Full-Stack end-to-end pipeline deployment.",
     description:
       "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
     tags: [

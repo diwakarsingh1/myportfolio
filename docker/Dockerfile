@@ -5,7 +5,7 @@ FROM node:18 AS build
 WORKDIR /app
 
 # Copy package.json and package-lock.json from the root directory (relative path)
-COPY ../package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install --legacy-peer-deps
@@ -15,7 +15,7 @@ RUN npm install --legacy-peer-deps
 RUN npm fund
 
 # Copy the rest of the application code into the container
-COPY ../ ./
+COPY ./ ./
 
 # Build the application
 RUN npm run build
@@ -27,7 +27,7 @@ FROM nginx:alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Copy the custom nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./docker/nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80 for the web server
 EXPOSE 80
