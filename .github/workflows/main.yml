@@ -25,7 +25,7 @@ jobs:
             }
       - run: echo "Azure loggedin successfully"
       - name: Print Azure Subscription Name
-      - run: |
+        run: |
           az account show --query name --output tsv
 
 
