@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - main  # Change to the branch you want to track
+permissions:
+  id-token: write
+  contents: read
 
+  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
