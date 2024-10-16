@@ -1,42 +1,47 @@
 name: Deploy FastAPI to Azure
 
 on:
-  #push:
-    #branches:
-      #- main  # Change to the branch you want to track
+  push:
+    branches:
+      - main  # Change to the branch you want to track
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    - name: Log in to Azure
-      uses: azure/login@v1
-      with:
-        creds: |
-          {
-            "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
-            "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
-            "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
-            "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-          }
+      - name: Log in to Azure
+        uses: azure/login@v1
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
+              "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
+              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+            }
+      - run: echo "Azure loggedin successfully"
+      - name: Print Azure Subscription Name
+      - run: |
+          az account show --query name --output tsv
 
-    - name: Log in to ACR
-      run: |
-        az acr login --name ${{ secrets.ACR_NAME }}
 
-    - name: Build and Push Docker Image to ACR
-      run: |
-        IMAGE_NAME=${{ secrets.ACR_LOGIN_SERVER }}/fastapi:latest
-        docker build -t $IMAGE_NAME .
-        docker push $IMAGE_NAME
+    # - name: Log in to ACR
+    #   run: |
+    #     az acr login --name ${{ secrets.ACR_NAME }}
 
-    - name: Deploy to Azure Container App
-      run: |
-        az containerapp update \
-          --name my-container-app \
-          --resource-group my-resource-group \
-          --image ${{ secrets.ACR_LOGIN_SERVER }}/fastapi:latest
+    # - name: Build and Push Docker Image to ACR
+    #   run: |
+    #     IMAGE_NAME=${{ secrets.ACR_LOGIN_SERVER }}/fastapi:latest
+    #     docker build -t $IMAGE_NAME .
+    #     docker push $IMAGE_NAME
+
+    # - name: Deploy to Azure Container App
+    #   run: |
+    #     az containerapp update \
+    #       --name my-container-app \
+    #       --resource-group my-resource-group \
+    #       --image ${{ secrets.ACR_LOGIN_SERVER }}/fastapi:latest
